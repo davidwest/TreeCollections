@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89D664D5-53AE-4CB3-BEA9-9E9004BCE438}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TreeCollections</RootNamespace>
+    <AssemblyName>TreeCollections</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InternalUtilities\CollectionExtensions.cs" />
+    <Compile Include="InternalUtilities\SerializeCollectionExtensions.cs" />
+    <Compile Include="InternalUtilities\StringWrapExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialTreeNode.cs" />
+    <Compile Include="Tree\Enumeration\EnumeratorHost.cs" />
+    <Compile Include="Tree\Enumeration\LevelOrderEnumerator.cs" />
+    <Compile Include="Tree\Enumeration\PreOrderEnumerator.cs" />
+    <Compile Include="Tree\Enumeration\PreOrderFilteringEnumerator.cs" />
+    <Compile Include="Tree\HierarchyPosition\HierarchyPosition.cs" />
+    <Compile Include="Tree\HierarchyPosition\HierarchyPositionParentComparer.cs" />
+    <Compile Include="Tree\HierarchyPosition\OperatorOverloads.cs" />
+    <Compile Include="Tree\HierarchyPosition\Parsing.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityDefinition\AliasComparer.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityDefinition\EntityDefinition.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityDefinition\Interfaces.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityTreeBuildExtensions.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\EntityTreeNodeCompressOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\ErrorCheckOptions.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\IdentityError.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\IEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\AddOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Adjacency.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\AttachOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Default\MutableEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\DetachOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\ErrorManagementHelpers.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\MoveOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\MutableEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OperationHelpers.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OrderComparers\NodeOrderPreferredOrderComparer.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OrderComparers\NodeOrderPropertyComparers.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\ReorderOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Specializations\MutableDualStateEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Specializations\MutableEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\ReadOnlyEntityTree\Default\ReadOnlyEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\ReadOnlyEntityTree\ReadOnlyEntityTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\IItemTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\ItemTreeBuildExtensions.cs" />
+    <Compile Include="Tree\ItemTree\ItemTreeNode.cs" />
+    <Compile Include="Tree\ItemTree\ItemTreeNodeCopyOperations.cs" />
+    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OrderComparers\NodeOrderItemComparer.cs" />
+    <Compile Include="Tree\ITreeNode.cs" />
+    <Compile Include="Tree\Serialization\HtmlBuildDefinition.cs" />
+    <Compile Include="Tree\Serialization\TreeHtmlBuilder.cs" />
+    <Compile Include="Tree\Serialization\TreeJsonBuilder.cs" />
+    <Compile Include="Tree\Serialization\TreeStringSerializationExtensions.cs" />
+    <Compile Include="Tree\Serialization\TreeXmlSerializationExtensions.cs" />
+    <Compile Include="Tree\TreeNode.cs" />
+    <Compile Include="Tree\TreeNodeCopyOperations.cs" />
+    <Compile Include="Tree\TreeNodeQueries.cs" />
+    <Compile Include="Tree\TreeQueryExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
