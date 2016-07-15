@@ -9,22 +9,22 @@ namespace TreeCollections
     {
         public IEnumerable<TNode> SelectSiblings()
         {
-            return Parent?.Children.Where(n => !n.Equals(this)) ?? EmptyNodes();
+            return Parent?.Children.Where(n => !n.Equals(this)) ?? Enumerable.Empty<TNode>();
         }
 
         public IEnumerable<TNode> SelectSiblingsBefore()
         {
-            return Parent?.Children.TakeWhile(n => !n.Equals(this)) ?? EmptyNodes();
+            return Parent?.Children.TakeWhile(n => !n.Equals(this)) ?? Enumerable.Empty<TNode>();
         }
 
         public IEnumerable<TNode> SelectSiblingsAfter()
         {
-            return Parent?.Children.SkipWhile(n => !n.Equals(this)).Skip(1) ?? EmptyNodes();
+            return Parent?.Children.SkipWhile(n => !n.Equals(this)).Skip(1) ?? Enumerable.Empty<TNode>();
         }
 
         public IEnumerable<TNode> SelectDescendants() => this.Skip(1);
         
-        public IEnumerable<TNode> SelectLeaves() => this.Where(n => n.Children.Count == 0);
+        public IEnumerable<TNode> SelectLeaves() => this.Where(n => n.IsLeaf);
         
         public IEnumerable<TNode> SelectPathUpward()
         {
@@ -41,6 +41,7 @@ namespace TreeCollections
         public IEnumerable<TNode> SelectAncestorsDownward() => SelectAncestorsUpward().Reverse();
 
         public bool IsRoot => Parent == null;
+        public bool IsLeaf => Children.Count == 0;
 
         public int Depth => this.Max(n => n.Level);
 
@@ -49,10 +50,5 @@ namespace TreeCollections
         public bool IsDescendantOf(TNode other) => SelectAncestorsUpward().Any(n => n.Equals(other));
 
         public bool IsSiblingOf(TNode other) => Parent?.Equals(other.Parent) ?? false;
-
-        private static IEnumerable<TNode> EmptyNodes()
-        {
-            yield break;
-        }
     }
 }

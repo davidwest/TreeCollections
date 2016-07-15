@@ -13,6 +13,8 @@ namespace TreeCollections.DemoConsole
             //Demos.DemoReadOnlyTree.Start();
             //Demos.DemoDefaultEntityTrees.Start();
 
+            //Demos.DemoSiblingRepositioning.Start();
+
             //Demos.DemoSerialization.Start();
         }
     }

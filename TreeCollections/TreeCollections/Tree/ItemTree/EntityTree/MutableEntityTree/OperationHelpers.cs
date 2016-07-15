@@ -7,7 +7,7 @@ namespace TreeCollections
     {
         private void MoveToNonSiblingAdjacentPosition(TNode targetNode, Adjacency adjacency)
         {
-            var targetIndex = targetNode.MyChildIndex + (adjacency == Adjacency.Before ? 0 : 1);
+            var targetIndex = targetNode.OrderIndex + (adjacency == Adjacency.Before ? 0 : 1);
             
             var newParent = targetNode.Parent;
 
@@ -18,8 +18,8 @@ namespace TreeCollections
 
         private void MoveToSiblingAdjacentPosition(TNode targetNode, Adjacency adjacency)
         {
-            var curIndex = MyChildIndex;
-            var targetIndex = targetNode.MyChildIndex;
+            var curIndex = OrderIndex;
+            var targetIndex = targetNode.OrderIndex;
 
             var diff = targetIndex - curIndex;
             if (diff == 0) return;

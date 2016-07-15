@@ -61,5 +61,21 @@ namespace TreeCollections
 
         public void MoveToPositionBefore(TId targetId) => MoveToAdjacentPosition(targetId, Adjacency.Before);
         public void MoveToPositionAfter(TId targetId) => MoveToAdjacentPosition(targetId, Adjacency.After);
+
+
+        public virtual void IncrementSiblingPosition()
+        {
+            if (NextSibling == null) return;
+
+            MoveToSiblingAdjacentPosition(NextSibling, Adjacency.After);
+        }
+
+
+        public virtual void DecrementSiblingPosition()
+        {
+            if (PreviousSibling == null) return;
+
+            MoveToSiblingAdjacentPosition(PreviousSibling, Adjacency.Before);
+        }
     }
 }
