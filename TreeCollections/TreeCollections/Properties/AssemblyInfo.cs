@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TreeCollections")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A generic tree library in C# that focuses on hierarchical entity representations.  It features full LINQ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("David West")]
 [assembly: AssemblyProduct("TreeCollections")]
