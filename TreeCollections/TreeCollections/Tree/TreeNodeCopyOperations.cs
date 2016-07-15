@@ -21,6 +21,7 @@ namespace TreeCollections
             CopyTo(parent, copy, n => true, maxRelativeDepth);
         }
         
+
         private static void BuildSerializable<TSNode>(TNode sourceNode, 
                                                       TSNode destParent, 
                                                       Action<TNode, TSNode> copy,

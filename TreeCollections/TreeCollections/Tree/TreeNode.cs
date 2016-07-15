@@ -56,7 +56,6 @@ namespace TreeCollections
         public IEnumerator<TNode> GetEnumerator()
         {
             return new PreOrderEnumerator<TNode>(This);
-
         }
 
         IEnumerator IEnumerable.GetEnumerator()

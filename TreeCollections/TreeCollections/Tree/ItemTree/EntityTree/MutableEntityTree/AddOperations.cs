@@ -28,7 +28,7 @@ namespace TreeCollections
                 throw new InvalidOperationException("Cannot insert at root level");
             }
 
-            var insertIndex = MyChildIndex + (adjacency == Adjacency.Before ? 0 : 1);
+            var insertIndex = OrderIndex + (adjacency == Adjacency.Before ? 0 : 1);
 
             return Parent.AddChild(item, insertIndex);
         }

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TreeCollections")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A generic tree library in C# that focuses on hierarchical entity representations.  It features full LINQ querying, intuitive manipulation of nodes, error detection, class extensibility (e.g. to accommodate business rules), and format conversion / serialization.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("David West")]
 [assembly: AssemblyProduct("TreeCollections")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("1.0.0.1")]

@@ -10,20 +10,14 @@ namespace TreeCollections
         public virtual void OrderChildrenAscending<TOrderKey>(Func<TItem, TOrderKey> selectKey)
             where TOrderKey : IComparable
         {
-            var comparer = new NodeAscOrderComparer<TNode, TItem>(item => selectKey(item));
-
-            _children.Sort(comparer);
-            SetChildrenSiblingReferences();
+            OrderChildren(seq => seq.OrderBy(n => selectKey(n.Item)));
         }
 
 
         public virtual void OrderChildrenDescending<TOrderKey>(Func<TItem, TOrderKey> selectKey)
             where TOrderKey : IComparable
         {
-            var comparer = new NodeDescOrderComparer<TNode, TItem>(item => selectKey(item));
-
-            _children.Sort(comparer);
-            SetChildrenSiblingReferences();
+            OrderChildren(seq => seq.OrderByDescending(n => selectKey(n.Item)));
         }
 
 
@@ -38,12 +32,26 @@ namespace TreeCollections
 
         public virtual void OrderChildren(params TId[] preferredOrder)
         {
-            var comparer = 
-                new NodeOrderPreferredOrderComparer<TNode, TId, TItem>(_children.Select(n => n.Id).ToArray(), 
-                                                                       preferredOrder, 
-                                                                       Definition.IdEqualityComparer);
+            var existingOrder = _children.Select(n => n.Id).ToArray();
+            var specifiedIds = preferredOrder.Intersect(existingOrder, Definition.IdEqualityComparer);
+            var unspecifiedIds = existingOrder.Except(preferredOrder, Definition.IdEqualityComparer);
 
-            _children.Sort(comparer);
+            var orderMap = 
+                specifiedIds.Concat(unspecifiedIds)
+                .Select((id, i) => new {id, i})
+                .ToDictionary(pair => pair.id, pair => pair.i, Definition.IdEqualityComparer);
+
+            OrderChildren(seq => seq.OrderBy(n => orderMap[n.Id]));
+        }
+
+
+        private void OrderChildren(Func<IEnumerable<TNode>, IEnumerable<TNode>> reorder)
+        {
+            var reordered = reorder(_children).ToArray();
+                
+            _children.Clear();
+            _children.AddRange(reordered);
+
             SetChildrenSiblingReferences();
         }
     }

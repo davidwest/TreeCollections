@@ -72,8 +72,6 @@
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\MoveOperations.cs" />
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\MutableEntityTreeNode.cs" />
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OperationHelpers.cs" />
-    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OrderComparers\NodeOrderPreferredOrderComparer.cs" />
-    <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\OrderComparers\NodeOrderPropertyComparers.cs" />
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\ReorderOperations.cs" />
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Specializations\MutableDualStateEntityTreeNode.cs" />
     <Compile Include="Tree\ItemTree\EntityTree\MutableEntityTree\Specializations\MutableEntityTreeNode.cs" />

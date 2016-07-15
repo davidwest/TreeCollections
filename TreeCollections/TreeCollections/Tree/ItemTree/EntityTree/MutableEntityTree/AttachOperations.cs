@@ -28,7 +28,7 @@ namespace TreeCollections
 
         public virtual void AttachAtAdjacentPosition(TNode node, Adjacency adjacency)
         {
-            var insertionIndex = MyChildIndex + (adjacency == Adjacency.Before ? 0 : 1);
+            var insertionIndex = OrderIndex + (adjacency == Adjacency.Before ? 0 : 1);
 
             Parent.AttachChild(node, insertionIndex);
         }

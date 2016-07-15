@@ -58,6 +58,7 @@
     <Compile Include="Demos\DemoDefaultEntityTrees.cs" />
     <Compile Include="Demos\DemoReadOnlyTree.cs" />
     <Compile Include="Demos\DemoSerialization.cs" />
+    <Compile Include="Demos\DemoSiblingRepositioning.cs" />
     <Compile Include="Demos\DemoSimpleMutableTree.cs" />
     <Compile Include="Demos\DemoAdvancedMutableTree.cs" />
     <Compile Include="Demos\DemoSerialTree.cs" />
