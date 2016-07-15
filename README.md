@@ -6,3 +6,5 @@ Features:
 * Error detection (e.g. cycles)
 * Class extensibility (e.g. to accommodate business rules)
 * Format conversion / serialization.
+
+[Get Nuget Package](https://www.nuget.org/packages/TreeCollections/)
