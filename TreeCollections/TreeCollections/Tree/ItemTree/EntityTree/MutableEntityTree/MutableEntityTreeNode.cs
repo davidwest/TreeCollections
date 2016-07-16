@@ -37,6 +37,9 @@ namespace TreeCollections
         { }
 
         public sealed override bool IsReadOnly => false;
+
+        protected virtual void OnNodeDetaching() { }
         protected virtual void OnNodeDetached(TNode formerParent) { }
+        protected virtual void OnChildrenReordered() { }
     }
 }

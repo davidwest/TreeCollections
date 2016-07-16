@@ -28,17 +28,17 @@ namespace TreeCollections
 
         public virtual void Enable()
         {
-            SetState(Item, true);
+            SetItemIsEnabled(true);
             UpdateSiblingAliasErrors();
         }
 
         public virtual void Disable()
         {
-            SetState(Item, false);
+            SetItemIsEnabled(false);
             UpdateSiblingAliasErrors();
         }
         
-        protected abstract void SetState(TItem value, bool state);
+        protected abstract void SetItemIsEnabled(bool isEnabled);
 
         protected bool OneOrMoreInPathAreDisabled => SelectPathUpward().Any(n => !n.IsEnabled);
     }
