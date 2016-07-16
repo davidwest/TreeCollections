@@ -76,7 +76,7 @@ namespace TreeCollections.DemoConsole.Demos
         }
 
         protected override void SetItemName(string name) => Item.Name = name;
-        protected override void SetState(DualStateCategoryItem value, bool state) => Item.IsEnabled = state;
+        protected override void SetItemIsEnabled(bool isEnabled) => Item.IsEnabled = isEnabled;
 
         protected override void OnNodeAttached()
         {

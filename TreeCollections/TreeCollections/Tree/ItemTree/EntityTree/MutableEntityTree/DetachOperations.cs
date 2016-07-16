@@ -13,6 +13,8 @@ namespace TreeCollections
                 throw new InvalidOperationException("Cannot detach a root");
             }
 
+            OnNodeDetaching();
+
             UpdateErrorsBeforeDetachingThis();
 
             var oldParent = Parent;

@@ -27,6 +27,8 @@ namespace TreeCollections
 
             _children.Sort(comparer);
             SetChildrenSiblingReferences();
+
+            OnChildrenReordered();
         }
         
 
@@ -53,6 +55,8 @@ namespace TreeCollections
             _children.AddRange(reordered);
 
             SetChildrenSiblingReferences();
+
+            OnChildrenReordered();
         }
     }
 }

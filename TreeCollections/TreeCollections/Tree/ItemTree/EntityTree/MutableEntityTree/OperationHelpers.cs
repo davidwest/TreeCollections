@@ -30,6 +30,8 @@ namespace TreeCollections
             Parent._children.Insert(targetIndex, This);
 
             Parent.SetChildrenSiblingReferences();
+
+            Parent.OnChildrenReordered();
         }
         
         
