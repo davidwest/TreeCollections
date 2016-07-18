@@ -24,7 +24,7 @@ namespace TreeCollections
 
         public TItem Item { get; }
 
-        protected int OrderIndex => Parent?._children.IndexOf(This) ?? -1;
+        public int OrderIndex => Parent?._children.IndexOf(This) ?? -1;
 
         protected abstract TNode Create(TItem item, TNode parent);
         
