@@ -35,13 +35,12 @@ namespace TreeCollections.DemoConsole.Demos
 
             //DemoRemoveWithCondition(root);
 
-            //DemoCopy(root);
-            //DemoMapCopy(root);
-            //DemoCompress(root);
-            //DemoCompressDepthLimited(root);
-            //DemoMapCompress(root);
-            //DemoMapCompressSearchDepthLimited(root);
-            //DemoMapCompressRenderDepthLimited(root);
+            DemoCopy(root);
+            DemoMapCopy(root);
+            DemoCompress(root);
+            DemoMapCompress(root);
+            DemoMapCompressSearchDepthLimited(root);
+            DemoMapCompressRenderDepthLimited(root);
         }
 
 
@@ -68,7 +67,7 @@ namespace TreeCollections.DemoConsole.Demos
         private static void DemoCopy(SimpleMutableCategoryNode root)
         {
             var newRoot = new SimpleMutableCategoryNode(root.Item);
-            root.MapCopyTo(newRoot, x => x);
+            root.CopyTo(newRoot);
 
             WriteLine("\n\n*** COPIED ***");
             Display(newRoot);
@@ -77,7 +76,7 @@ namespace TreeCollections.DemoConsole.Demos
         private static void DemoMapCopy(SimpleMutableCategoryNode root)
         {
             var newRoot = new ReadOnlyCategoryNode(new DualStateCategoryItem(root.Item));
-            root.MapCopyTo(newRoot, c => new DualStateCategoryItem(c));
+            root.MapCopyTo(newRoot, node => new DualStateCategoryItem(node.Item));
 
             WriteLine("\n\n*** MAP-COPIED ***");
             Display(newRoot);
@@ -97,7 +96,7 @@ namespace TreeCollections.DemoConsole.Demos
             var newRoot = new ReadOnlyCategoryNode(new DualStateCategoryItem(root.Item));
             root.MapCompressTo(newRoot,
                                n => n.Error != IdentityError.None,
-                               c => new DualStateCategoryItem(c));
+                               n => new DualStateCategoryItem(n.Item));
 
             WriteLine("\n\n*** MAP-COMPRESSED ***");
             Display(newRoot);
@@ -119,7 +118,7 @@ namespace TreeCollections.DemoConsole.Demos
             var newRoot = new ReadOnlyCategoryNode(new DualStateCategoryItem(root.Item));
             root.MapCompressTo(newRoot,
                                n => n.Item.Name.StartsWith("c", StringComparison.OrdinalIgnoreCase),
-                               c => new DualStateCategoryItem(c),
+                               n => new DualStateCategoryItem(n.Item),
                                2);
 
             WriteLine("\n\n*** MAP-COMPRESSED (SEARCH TO LEVEL 2) ***");
@@ -131,7 +130,7 @@ namespace TreeCollections.DemoConsole.Demos
             var newRoot = new ReadOnlyCategoryNode(new DualStateCategoryItem(root.Item));
             root.MapCompressTo(newRoot,
                                n => n.Item.Name.StartsWith("c", StringComparison.OrdinalIgnoreCase),
-                               c => new DualStateCategoryItem(c),
+                               n => new DualStateCategoryItem(n.Item),
                                null, 2);
 
             WriteLine("\n\n*** MAP-COMPRESSED (RENDER TO LEVEL 2) ***");

@@ -28,7 +28,7 @@ namespace TreeCollections.DemoConsole.Demos
             Display(copied);
 
             var mapCopied = new SimpleMutableCategoryNode(root.Item);
-            root.MapCopyTo(mapCopied, item => item as CategoryItem);
+            root.MapCopyTo(mapCopied, n => n.Item as CategoryItem);
             Display(mapCopied);
         }
 

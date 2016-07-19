@@ -9,7 +9,7 @@ namespace TreeCollections
         public void CopyTo(TNode destParent,
                            int? maxRelativeDepth = null)
         {
-            MapCopyTo(destParent, n => true, item => item, maxRelativeDepth);
+            MapCopyTo(destParent, n => true, node => node.Item, maxRelativeDepth);
         }
 
 
@@ -17,7 +17,7 @@ namespace TreeCollections
                            Func<TNode, bool> allowNext,
                            int? maxRelativeDepth = null)
         {
-            MapCopyTo(destParent, allowNext, item => item, maxRelativeDepth);
+            MapCopyTo(destParent, allowNext, node => node.Item, maxRelativeDepth);
         }
 
 
@@ -25,7 +25,7 @@ namespace TreeCollections
                                          int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TItem>
         {
-            MapCopyTo(destParent, n => true, item => item, maxRelativeDepth);
+            MapCopyTo(destParent, n => true, node => node.Item, maxRelativeDepth);
         }
 
 
@@ -34,12 +34,12 @@ namespace TreeCollections
                                          int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TItem>
         {
-            MapCopyTo(destParent, allowNext, item => item, maxRelativeDepth);
+            MapCopyTo(destParent, allowNext, node => node.Item, maxRelativeDepth);
         }
 
 
         public void MapCopyTo<TDestNode, TDestItem>(TDestNode destParent,
-                                                    Func<TItem, TDestItem> mapToDestItem,
+                                                    Func<TNode, TDestItem> mapToDestItem,
                                                     int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
         {
@@ -49,7 +49,7 @@ namespace TreeCollections
 
         public void MapCopyTo<TDestNode, TDestItem>(TDestNode destParent, 
                                                     Func<TNode, bool> allowNext, 
-                                                    Func<TItem, TDestItem> mapToDestItem, 
+                                                    Func<TNode, TDestItem> mapToDestItem, 
                                                     int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
         {
@@ -62,7 +62,7 @@ namespace TreeCollections
         private static void MapCopyTo<TDestNode, TDestItem>(TNode sourceParent, 
                                                             TDestNode destParent, 
                                                             Func<TNode, bool> allowNext,
-                                                            Func<TItem, TDestItem> mapToDestItem,  
+                                                            Func<TNode, TDestItem> mapToDestItem,  
                                                             int curDepth, 
                                                             int maxRelativeDepth)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
@@ -70,7 +70,7 @@ namespace TreeCollections
             var destValues =
                 sourceParent.Children
                 .Where(allowNext)
-                .Select(c => mapToDestItem(c.Item))
+                .Select(mapToDestItem)
                 .ToArray();
 
             destParent.Build(destValues);
