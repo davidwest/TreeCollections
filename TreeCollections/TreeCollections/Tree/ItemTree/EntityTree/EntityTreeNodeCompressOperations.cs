@@ -12,7 +12,7 @@ namespace TreeCollections
                                int? maxRelativeSearchDepth = null,
                                int? maxRelativeRenderDepth = null)
         {
-            MapCompressTo(destRoot, matchesCriteria, item => item, maxRelativeSearchDepth, maxRelativeRenderDepth);
+            MapCompressTo(destRoot, matchesCriteria, node => node.Item, maxRelativeSearchDepth, maxRelativeRenderDepth);
         }
 
 
@@ -22,7 +22,7 @@ namespace TreeCollections
                                int? maxRelativeSearchDepth = null,
                                int? maxRelativeRenderDepth = null)
         {
-            MapCompressTo(destRoot, allowNext, matchesCriteria, item => item, maxRelativeSearchDepth, maxRelativeRenderDepth);
+            MapCompressTo(destRoot, allowNext, matchesCriteria, node => node.Item, maxRelativeSearchDepth, maxRelativeRenderDepth);
         }
 
 
@@ -32,7 +32,7 @@ namespace TreeCollections
                                              int? maxRelativeRenderDepth = null)
             where TDestNode : EntityTreeNode<TDestNode, TId, TItem>
         {
-            MapCompressTo(destRoot, matchesCriteria, item => item, maxRelativeSearchDepth, maxRelativeRenderDepth);
+            MapCompressTo(destRoot, matchesCriteria, node => node.Item, maxRelativeSearchDepth, maxRelativeRenderDepth);
         }
 
 
@@ -43,13 +43,13 @@ namespace TreeCollections
                                              int? maxRelativeRenderDepth = null)
             where TDestNode : EntityTreeNode<TDestNode, TId, TItem>
         {
-            MapCompressTo(destRoot, allowNext, matchesCriteria, item => item, maxRelativeSearchDepth, maxRelativeRenderDepth);
+            MapCompressTo(destRoot, allowNext, matchesCriteria, node => node.Item, maxRelativeSearchDepth, maxRelativeRenderDepth);
         }
 
 
         public void MapCompressTo<TDestNode, TDestItem>(TDestNode destRoot,
                                                         Func<TNode, bool> matchesCriteria,
-                                                        Func<TItem, TDestItem> mapItem,
+                                                        Func<TNode, TDestItem> mapItem,
                                                         int? maxRelativeSearchDepth = null,
                                                         int? maxRelativeRenderDepth = null)
             where TDestNode : EntityTreeNode<TDestNode, TId, TDestItem>
@@ -63,7 +63,7 @@ namespace TreeCollections
         public void MapCompressTo<TDestNode, TDestItem>(TDestNode destRoot,
                                                         Func<TNode, bool> allowNext,
                                                         Func<TNode, bool> matchesCriteria,
-                                                        Func<TItem, TDestItem> mapItem,
+                                                        Func<TNode, TDestItem> mapItem,
                                                         int? maxRelativeSearchDepth = null,
                                                         int? maxRelativeRenderDepth = null)
             where TDestNode : EntityTreeNode<TDestNode, TId, TDestItem>
@@ -77,7 +77,7 @@ namespace TreeCollections
         private static void MapCompressTo<TDestNode, TDestItem>(IEnumerable<TNode> sourceNodes,
                                                                 TDestNode destRoot,
                                                                 Func<TNode, bool> matchesCriteria,
-                                                                Func<TItem, TDestItem> mapItem, 
+                                                                Func<TNode, TDestItem> mapItem, 
                                                                 int? maxRelativeRenderDepth = null)
             where TDestNode : EntityTreeNode<TDestNode, TId, TDestItem>
         {
@@ -92,7 +92,7 @@ namespace TreeCollections
                 return;
             }
 
-            destRoot.Build(parent => sourceDescendantNodePool[parent.Id].Select(c => mapItem(c.Item)), maxRelativeRenderDepth);
+            destRoot.Build(parent => sourceDescendantNodePool[parent.Id].Select(mapItem), maxRelativeRenderDepth);
         }
     }
 }
