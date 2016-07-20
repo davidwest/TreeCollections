@@ -22,6 +22,8 @@ namespace TreeCollections
                 throw new InvalidOperationException("Node to manually attach must share the same entity definition instance and have identical error check options");
             }
 
+            node.OnNodeReparenting(This);
+
             AttachChildOnMove(node, insertionIndex);
         }
 
