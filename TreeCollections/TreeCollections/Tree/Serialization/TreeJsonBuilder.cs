@@ -71,7 +71,7 @@ namespace TreeCollections
 
             if (hasProperties)
             {
-                _builder.Append(propertyMap.Select(kvp => $"{kvp.Key.WrapDoubleQuotes()}:{kvp.Value.WrapDoubleQuotes()}").ToCsv());
+                _builder.Append(propertyMap.Select(kvp => $"{kvp.Key.WrapDoubleQuotes()}:{kvp.Value}").ToCsv());
             }
 
             BuildChildren(node, curDepth, $"{(hasProperties ? "," : string.Empty)}{_childrenPropertyName.WrapDoubleQuotes()}:");
