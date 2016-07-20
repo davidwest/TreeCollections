@@ -40,6 +40,8 @@ namespace TreeCollections
 
         protected virtual void OnNodeDetaching() { }
         protected virtual void OnNodeDetached(TNode formerParent) { }
+        protected virtual void OnNodeReparenting(TNode targetParent) { }
+        protected virtual void OnNodeReparented() { }
         protected virtual void OnChildrenReordered() { }
     }
 }

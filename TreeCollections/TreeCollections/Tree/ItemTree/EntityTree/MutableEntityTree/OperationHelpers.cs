@@ -7,6 +7,8 @@ namespace TreeCollections
     {
         private void MoveToNonSiblingAdjacentPosition(TNode targetNode, Adjacency adjacency)
         {
+            OnNodeReparenting(targetNode);
+
             var targetIndex = targetNode.OrderIndex + (adjacency == Adjacency.Before ? 0 : 1);
             
             var newParent = targetNode.Parent;
@@ -33,7 +35,7 @@ namespace TreeCollections
 
             Parent.OnChildrenReordered();
         }
-        
+
         
         private void AttachChildOnAdd(TNode node, int? insertIndex = null)
         {
@@ -63,6 +65,7 @@ namespace TreeCollections
             
             node.SetErrorsAfterMovingThis();
             node.OnNodeAttached();
+            node.OnNodeReparented();
         }
 
         

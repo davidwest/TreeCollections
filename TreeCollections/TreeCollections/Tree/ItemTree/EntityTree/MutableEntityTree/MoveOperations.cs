@@ -5,27 +5,34 @@ using System.Linq;
 namespace TreeCollections
 {
     public abstract partial class MutableEntityTreeNode<TNode, TId, TItem>
-    {
+    {        
         public virtual void MoveToParent(TId parentId, int? insertIndex = null)
         {
-            var newParent = Root[parentId];
+            var targetParent = Root[parentId];
 
-            var isAlreadyHere = insertIndex.HasValue
-                                    ? newParent._children.IndexOf(This) == insertIndex.Value
-                                    : newParent._children.LastOrDefault()?.Equals(This) ?? false;
-
-            if (isAlreadyHere)
+            if (targetParent.Equals(Parent))
             {
+                if (!insertIndex.HasValue || insertIndex.Value > Parent.Children.Count - 1)
+                {
+                    MoveToSiblingAdjacentPosition(Parent.Children.Last(), Adjacency.After);
+                }
+                else
+                {
+                    MoveToSiblingAdjacentPosition(Parent.Children[insertIndex.Value], Adjacency.After);
+                }
+
                 return;
             }
-
-            if (newParent.Equals(this) || IsAncestorOf(newParent))
+            
+            if (targetParent.Equals(this) || IsAncestorOf(targetParent))
             {
                 throw new InvalidOperationException("Cannot move to self or a descendant");
             }
 
+            OnNodeReparenting(targetParent);
+
             Detach();
-            newParent.AttachChildOnMove(This, insertIndex);
+            targetParent.AttachChildOnMove(This, insertIndex);
         }
 
 
