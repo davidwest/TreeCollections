@@ -56,6 +56,7 @@
     <Compile Include="Demos\Classes\ClassesForAdvanced.cs" />
     <Compile Include="Demos\DemoAdvancedMutableTree2.cs" />
     <Compile Include="Demos\DemoDefaultEntityTrees.cs" />
+    <Compile Include="Demos\DemoPreOrderEnumeration.cs" />
     <Compile Include="Demos\DemoReadOnlyTree.cs" />
     <Compile Include="Demos\DemoSerialization.cs" />
     <Compile Include="Demos\DemoSiblingRepositioning.cs" />
