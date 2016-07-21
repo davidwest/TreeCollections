@@ -31,9 +31,9 @@ namespace TreeCollections
                 return true;
             }
 
-            var firstChild = Current.Children.FirstOrDefault();
+            var firstChild = Current.Children.FirstOrDefault(_allowNext);
 
-            if (firstChild != null && firstChild.Level <= _maxLevel && _allowNext(firstChild))
+            if (firstChild != null && firstChild.Level <= _maxLevel)
             {
                 Current = firstChild;
                 return true;
@@ -46,10 +46,7 @@ namespace TreeCollections
 
             var node = Current;
 
-            var nextSibling = 
-                Current
-                .SelectSiblingsAfter()
-                .FirstOrDefault(_allowNext);
+            var nextSibling = Current.SelectSiblingsAfter().FirstOrDefault(_allowNext);
 
             while (nextSibling == null)
             {

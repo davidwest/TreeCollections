@@ -17,6 +17,7 @@ namespace TreeCollections.DemoConsole
             //Demos.DemoSiblingRepositioning.Start();
 
             //Demos.DemoSerialization.Start();
+            //Demos.DemoPreOrderEnumeration.Start();
         }
     }
 }
