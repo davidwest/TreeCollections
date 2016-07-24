@@ -9,7 +9,7 @@ namespace TreeCollections
         public void CopyTo(TNode destParent,
                            int? maxRelativeDepth = null)
         {
-            MapCopyTo(destParent, n => true, node => node.Item, maxRelativeDepth);
+            MapCopyTo(destParent, null, node => node.Item, maxRelativeDepth);
         }
 
 
@@ -25,7 +25,7 @@ namespace TreeCollections
                                          int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TItem>
         {
-            MapCopyTo(destParent, n => true, node => node.Item, maxRelativeDepth);
+            MapCopyTo(destParent, null, node => node.Item, maxRelativeDepth);
         }
 
 
@@ -43,7 +43,7 @@ namespace TreeCollections
                                                     int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
         {
-            MapCopyTo(destParent, n => true, mapToDestItem, maxRelativeDepth);
+            MapCopyTo(destParent, null, mapToDestItem, maxRelativeDepth);
         }
 
 
@@ -53,18 +53,26 @@ namespace TreeCollections
                                                     int? maxRelativeDepth = null)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
         {
-            if (!allowNext(This) || maxRelativeDepth <= 0) return;
+            if (maxRelativeDepth <= 0) return;
 
-            MapCopyTo(This, destParent, allowNext, mapToDestItem, 0, maxRelativeDepth ?? int.MaxValue);
+            if (allowNext == null)
+            {
+                NonFilteredMapCopyTo(This, destParent, mapToDestItem, 0, maxRelativeDepth ?? int.MaxValue);        
+            }
+            else
+            {
+                if (!allowNext(This)) return;
+                FilteredMapCopyTo(This, destParent, allowNext, mapToDestItem, 0, maxRelativeDepth ?? int.MaxValue);
+            }   
         }
 
 
-        private static void MapCopyTo<TDestNode, TDestItem>(TNode sourceParent, 
-                                                            TDestNode destParent, 
-                                                            Func<TNode, bool> allowNext,
-                                                            Func<TNode, TDestItem> mapToDestItem,  
-                                                            int curDepth, 
-                                                            int maxRelativeDepth)
+        private static void FilteredMapCopyTo<TDestNode, TDestItem>(TNode sourceParent, 
+                                                                    TDestNode destParent, 
+                                                                    Func<TNode, bool> allowNext,
+                                                                    Func<TNode, TDestItem> mapToDestItem,  
+                                                                    int curDepth, 
+                                                                    int maxRelativeDepth)
             where TDestNode : ItemTreeNode<TDestNode, TDestItem>
         {
             var destValues =
@@ -79,11 +87,39 @@ namespace TreeCollections
 
             var childPairs =
                 sourceParent.Children
+                .Where(allowNext)
                 .Zip(destParent.Children, (sourceChild, destChild) => new { sourceChild, destChild });
 
             foreach (var pair in childPairs)
             {
-                MapCopyTo(pair.sourceChild, pair.destChild, allowNext, mapToDestItem, curDepth, maxRelativeDepth);
+                FilteredMapCopyTo(pair.sourceChild, pair.destChild, allowNext, mapToDestItem, curDepth, maxRelativeDepth);
+            }
+        }
+
+
+        private static void NonFilteredMapCopyTo<TDestNode, TDestItem>(TNode sourceParent,
+                                                                       TDestNode destParent,
+                                                                       Func<TNode, TDestItem> mapToDestItem,
+                                                                       int curDepth,
+                                                                       int maxRelativeDepth)
+            where TDestNode : ItemTreeNode<TDestNode, TDestItem>
+        {
+            var destValues =
+                sourceParent.Children
+                .Select(mapToDestItem)
+                .ToArray();
+
+            destParent.Build(destValues);
+
+            if (++curDepth == maxRelativeDepth) return;
+
+            var childPairs =
+                sourceParent.Children
+                .Zip(destParent.Children, (sourceChild, destChild) => new { sourceChild, destChild });
+
+            foreach (var pair in childPairs)
+            {
+                NonFilteredMapCopyTo(pair.sourceChild, pair.destChild, mapToDestItem, curDepth, maxRelativeDepth);
             }
         }
     }
