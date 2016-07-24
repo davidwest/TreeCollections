@@ -18,6 +18,8 @@ namespace TreeCollections.DemoConsole
 
             //Demos.DemoSerialization.Start();
             //Demos.DemoPreOrderEnumeration.Start();
+
+            //Demos.DemoCopyTo.Start();
         }
     }
 }
