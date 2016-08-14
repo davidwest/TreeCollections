@@ -7,6 +7,6 @@ Features:
 * Class extensibility (e.g. to accommodate business rules)
 * Format conversion / serialization.
 
-[Documentation](https://github.com/davidwest/treecollections/wiki)
+[Tutorial](https://github.com/davidwest/treecollections/wiki)
 
 [Get Nuget Package](https://www.nuget.org/packages/TreeCollections/)
