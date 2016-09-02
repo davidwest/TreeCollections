@@ -30,11 +30,11 @@ namespace TreeCollections
             Build(parent, sourceParent, getChildren, mapToItem, 0, maxRelativeDepth ?? int.MaxValue);
         }
 
-
+        
         public static void Build<TNode, TItem, TSource>(this TNode parent, 
-                                                        IEnumerable<TSource> sourceItems, 
+                                                        IEnumerable<TSource> sourceItems,
+                                                        Func<TSource, TItem> mapToItem,
                                                         Func<TSource, HierarchyPosition> getHierarchyId, 
-                                                        Func<TSource, TItem> mapToItem, 
                                                         int? maxRelativeDepth = null)
             where TNode : ItemTreeNode<TNode, TItem>
         {
