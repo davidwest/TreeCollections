@@ -10,7 +10,8 @@ namespace TreeCollections.DemoConsole.Demos
 {
     public static class DemoSimpleMutableTree
     {
-        private static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private const string OutputFolderName = @"c:\TreeCollectionDemos";
+        private const string FileName = "DemoSimpleMutableTree.json";
 
         public static void Start()
         {
@@ -55,7 +56,7 @@ namespace TreeCollections.DemoConsole.Demos
 
             var json = builder.ToJson(root, 2);
 
-            File.WriteAllText(Path.Combine(DesktopPath,"categories.json"), json);
+            File.WriteAllText(Path.Combine(OutputFolderName, FileName), json);
         }
 
         private static void DemoRemoveWithCondition(SimpleMutableCategoryNode root)
@@ -329,6 +330,14 @@ namespace TreeCollections.DemoConsole.Demos
 
             var errorStr = error != IdentityError.None ? $"[** {error} **]" : "";
             return $"{n.Id} {n.Item.Name} [{n.HierarchyId.ToString("/")}] {errorStr}";
+        }
+
+        private static void InitializeOutputFolder()
+        {
+            if (!Directory.Exists(OutputFolderName))
+            {
+                Directory.CreateDirectory(OutputFolderName);
+            }
         }
     }
 }

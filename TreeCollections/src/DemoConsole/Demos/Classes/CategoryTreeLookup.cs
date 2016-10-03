@@ -7,7 +7,7 @@ namespace TreeCollections.DemoConsole.Demos
 {
     public class CategoryTreeLookup
     {
-        private const string PathPrefix = @"..\..\Data";
+        private readonly string _pathPrefix = Path.Combine(Directory.GetCurrentDirectory(), "Data");
         
         private const string CategoryFileName = "categories.json";
         private const string CategoryContentMapPathFileName = "category-content-map.json";
@@ -53,7 +53,7 @@ namespace TreeCollections.DemoConsole.Demos
 
         private CategoryDataNode GetCategoryDataRoot()
         {
-            var path = Path.Combine(PathPrefix, _sourceName, CategoryFileName);
+            var path = Path.Combine(_pathPrefix, _sourceName, CategoryFileName);
             var json = File.ReadAllText(path);
             var root = JsonConvert.DeserializeObject<CategoryDataNode>(json);
             return root;
@@ -61,7 +61,7 @@ namespace TreeCollections.DemoConsole.Demos
 
         private IDictionary<long, ContentItem[]> GetCategoryContentMap()
         {
-            var path = Path.Combine(PathPrefix, _sourceName, CategoryContentMapPathFileName);
+            var path = Path.Combine(_pathPrefix, _sourceName, CategoryContentMapPathFileName);
             var json = File.ReadAllText(path);
             var map = JsonConvert.DeserializeObject<Dictionary<long, ContentItem[]>>(json);
             return map;

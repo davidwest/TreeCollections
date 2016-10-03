@@ -38,6 +38,7 @@ dlldata.c
 *_p.c
 *_i.h
 *.dll
+*.dg
 *.ilk
 *.meta
 *.obj
@@ -189,6 +190,11 @@ FakesAssemblies/
 *.ncrunchsolution
 *.ncrunchproject
 
-# Cached Image Directory for Image Resizer
-**/[Cc]ontent/[Cc]ached[Ii]mages/**
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+project.lock.json
 

@@ -1,0 +1,24 @@
+{
+    "title": "TreeCollections.DemoConsole",
+    "copyright": "© 2016 David West",
+    "description": "Demos for TreeCollections",
+  "version": "1.0.1",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+        "type": "platform",
+        "version": "1.0.1"
+    },
+    "Newtonsoft.Json": "9.0.1",
+    "TreeCollections": "1.0.1*"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}

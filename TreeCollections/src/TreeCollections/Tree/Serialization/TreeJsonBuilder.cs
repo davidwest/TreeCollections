@@ -22,7 +22,7 @@ namespace TreeCollections
         }
 
         public TreeJsonBuilder(string childrenPropertyName = "Children") 
-            : this(n => new Dictionary<string, string> { {"HierarchyId", n.HierarchyId.ToString("/")}}, childrenPropertyName)
+            : this(n => new Dictionary<string, string> { {"HierarchyId", n.HierarchyId.ToString("/").WrapDoubleQuotes()}}, childrenPropertyName)
         { }
 
         public string ToJson(TNode node, bool includeRoot = true)

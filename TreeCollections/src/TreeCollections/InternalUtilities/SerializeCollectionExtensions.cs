@@ -1,6 +1,5 @@
 ﻿
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace TreeCollections
@@ -17,7 +16,7 @@ namespace TreeCollections
                                                   string wrapperStart = "",
                                                   string wrapperEnd = "")
         {
-            return values.SerializeToString(separator.ToString(CultureInfo.InvariantCulture), wrapperStart, wrapperEnd);
+            return values.SerializeToString(separator.ToString(), wrapperStart, wrapperEnd);
         }
 
         public static string SerializeToString<T>(this IEnumerable<T> values,

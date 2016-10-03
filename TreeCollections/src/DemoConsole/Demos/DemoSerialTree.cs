@@ -8,10 +8,13 @@ namespace TreeCollections.DemoConsole.Demos
 {
     public static class DemoSerialTree
     {
-        private static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
+        private const string OutputFolderName = @"c:\TreeCollectionDemos";
+        private const string FileName = "DemoSerialTree.json";
+        
         public static void Start()
         {
+            InitializeOutputFolder();
+
             var dataRoot = GetRoot();
             Debug.WriteLine("*** Original ***");
             Display(dataRoot);
@@ -19,7 +22,7 @@ namespace TreeCollections.DemoConsole.Demos
             var json = JsonConvert.SerializeObject(dataRoot);
             Debug.WriteLine("*** Serialized ***\n");
             Debug.WriteLine(json + "\n\n");
-            File.WriteAllText(Path.Combine(DesktopPath, "testcategories.json"), json);
+            File.WriteAllText(Path.Combine(OutputFolderName, FileName), json);
 
             dataRoot = JsonConvert.DeserializeObject<CategoryDataNode>(json);
             Debug.WriteLine("*** De-serialized ***");
@@ -80,6 +83,14 @@ namespace TreeCollections.DemoConsole.Demos
                         new CategoryDataNode(20, "Sizes")));
 
             return root;
+        }
+
+        private static void InitializeOutputFolder()
+        {
+            if (!Directory.Exists(OutputFolderName))
+            {
+                Directory.CreateDirectory(OutputFolderName);
+            }
         }
     }
 }
