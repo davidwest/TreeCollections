@@ -2,20 +2,16 @@
     "description": "A generic tree library in C# that focuses on hierarchical entity representations.  Features: full LINQ querying, intuitive manipulation of nodes, error detection (e.g. cycles), class extensibility (e.g. to accommodate business rules), format conversion / serialization.",
     "copyright": "© 2016 David West",
     "title": "TreeCollections",
-    "version": "1.0.1",
-
-    "dependencies": {
-        "NETStandard.Library": "1.6.0"
-    },
+    "version": "1.0.2",
 
     "frameworks": {
-        "netstandard1.6": {
-            "imports": "dnxcore50"
+        "netstandard1.1": {
+            "dependencies": {
+                "System.Collections": "4.0.11",
+                "System.Linq": "4.1.0"
+            }
         },
-        "netstandard1.4": {
-            "imports": "dnxcore50"
-        },
-        "net452": {}
+        "net45":  {}
     },
 
     "scripts": {
