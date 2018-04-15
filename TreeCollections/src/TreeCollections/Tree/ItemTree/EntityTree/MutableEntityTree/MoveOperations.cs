@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 
 namespace TreeCollections
@@ -18,7 +17,11 @@ namespace TreeCollections
                 }
                 else
                 {
-                    MoveToSiblingAdjacentPosition(Parent.Children[insertIndex.Value], Adjacency.After);
+                    var effectiveInsertIndex = insertIndex.Value > 0 ? insertIndex.Value : 0;
+
+                    var adjacency = effectiveInsertIndex < OrderIndex ? Adjacency.Before : Adjacency.After;
+
+                    MoveToSiblingAdjacentPosition(Parent.Children[effectiveInsertIndex], adjacency);
                 }
 
                 return;

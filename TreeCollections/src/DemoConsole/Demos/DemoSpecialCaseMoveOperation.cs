@@ -8,21 +8,64 @@ namespace TreeCollections.DemoConsole.Demos
     {
         public static void Start()
         {
-            var root = new CategoryTreeLookup("Source1").GetSimpleMutableCategoryTree();
-            Display(root);
+            // In all examples, node 251 is moved but stays within its parent (246)
 
-            root[327].MoveToParent(325);
-            Display(root);
+            var root = GetRoot();
+            Display(root[246]);
 
-            // should be exactly the same position
-            root[326].MoveToParent(325, 0);
-            Display(root);
+            // make it the first child
+            root[251].MoveToParent(246, 0);
+            Display(root[246]);
 
-            root[326].MoveToParent(325, 1);
-            Display(root);
+            root = GetRoot();
+            Display(root[246]);
 
-            root[327].MoveToParent(325, 2);
-            Display(root);
+            // make it the first child even if out of range
+            root[251].MoveToParent(246, -100);
+            Display(root[246]);
+
+            // ----
+            root = GetRoot();
+            Display(root[246]);
+
+            // make it the last child
+            root[251].MoveToParent(246, 4);
+            Display(root[246]);
+
+            // ----
+            root = GetRoot();
+            Display(root[246]);
+
+            // make it the last child even if out of range
+            root[251].MoveToParent(246, 100);
+            Display(root[246]);
+
+            // ----
+            root = GetRoot();
+            Display(root[246]);
+
+            // no change
+            root[251].MoveToParent(246, 2);
+            Display(root[246]);
+
+            // ----
+            root = GetRoot();
+            Display(root[246]);
+
+            root[251].MoveToParent(246, 1);
+            Display(root[246]);
+
+            // ----
+            root = GetRoot();
+            Display(root[246]);
+
+            root[251].MoveToParent(246, 3);
+            Display(root[246]);
+        }
+
+        private static SimpleMutableCategoryNode GetRoot()
+        {
+            return new CategoryTreeLookup("Source1").GetSimpleMutableCategoryTree();
         }
 
         private static void Display(IEnumerable<SimpleMutableCategoryNode> root)

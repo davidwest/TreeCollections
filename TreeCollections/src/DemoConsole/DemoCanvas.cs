@@ -6,7 +6,7 @@ namespace TreeCollections.DemoConsole
         public static void Start()
         {
             //Demos.DemoSimpleMutableTree.Start();
-            //Demos.DemoSpecialCaseMoveOperation.Start();
+            Demos.DemoSpecialCaseMoveOperation.Start();
             //Demos.DemoAdvancedMutableTree.Start();
             //Demos.DemoSerialTree.Start();
 
@@ -14,7 +14,7 @@ namespace TreeCollections.DemoConsole
             //Demos.DemoReadOnlyTree.Start();
             //Demos.DemoDefaultEntityTrees.Start();
 
-            Demos.DemoSiblingRepositioning.Start();
+            //Demos.DemoSiblingRepositioning.Start();
 
             //Demos.DemoSerialization.Start();
             //Demos.DemoPreOrderEnumeration.Start();
