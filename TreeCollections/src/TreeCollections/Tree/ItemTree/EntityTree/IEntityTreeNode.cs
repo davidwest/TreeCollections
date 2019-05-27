@@ -1,5 +1,4 @@
-﻿
-namespace TreeCollections
+﻿namespace TreeCollections
 {
     public interface IEntityTreeNode<out TId, out TItem> : IItemTreeNode<TItem>
     {

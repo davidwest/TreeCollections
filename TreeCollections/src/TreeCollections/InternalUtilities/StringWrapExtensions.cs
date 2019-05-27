@@ -1,5 +1,4 @@
-﻿
-namespace TreeCollections
+﻿namespace TreeCollections
 {
     internal static class StringUtilityExtensions
     {

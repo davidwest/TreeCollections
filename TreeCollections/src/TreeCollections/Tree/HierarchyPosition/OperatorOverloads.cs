@@ -1,5 +1,4 @@
-﻿
-namespace TreeCollections
+﻿namespace TreeCollections
 {
     public partial class HierarchyPosition
     {
