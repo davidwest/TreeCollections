@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>TreeCollections</PackageId>
+    <AssemblyName>TreeCollections</AssemblyName>
+    <AssemblyTitle>TreeCollections</AssemblyTitle>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2</FileVersion>
+    <Version>1.0.2</Version>
+    <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
+    <Description>A generic tree library in C# that focuses on hierarchical entity representations.  Features: full LINQ querying, intuitive manipulation of nodes, error detection (e.g. cycles), class extensibility (e.g. to accommodate business rules), format conversion / serialization.</Description>
+    <Authors>David West</Authors>
+    <Copyright>© 2019 David West</Copyright>
+    <PackageProjectUrl>https://github.com/davidwest/TreeCollections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/davidwest/TreeCollections</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>tree collection list node hierarchy linq entity</PackageTags>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
+    <Exec Command="dotnet pack --no-build --configuration Release" />
+  </Target>
+  
+</Project>

@@ -17,11 +17,7 @@ namespace TreeCollections
                 }
                 else
                 {
-                    var effectiveInsertIndex = insertIndex.Value > 0 ? insertIndex.Value : 0;
-
-                    var adjacency = effectiveInsertIndex < OrderIndex ? Adjacency.Before : Adjacency.After;
-
-                    MoveToSiblingAdjacentPosition(Parent.Children[effectiveInsertIndex], adjacency);
+                    MoveToSiblingAdjacentPosition(Parent.Children[insertIndex.Value], Adjacency.After);
                 }
 
                 return;

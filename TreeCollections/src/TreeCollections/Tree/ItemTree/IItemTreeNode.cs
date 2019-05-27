@@ -1,5 +1,4 @@
-﻿
-namespace TreeCollections
+﻿namespace TreeCollections
 {
     public interface IItemTreeNode<out TItem> : ITreeNode
     {
