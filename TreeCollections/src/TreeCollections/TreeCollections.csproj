@@ -4,9 +4,9 @@
     <PackageId>TreeCollections</PackageId>
     <AssemblyName>TreeCollections</AssemblyName>
     <AssemblyTitle>TreeCollections</AssemblyTitle>
-    <AssemblyVersion>1.0.3</AssemblyVersion>
-    <FileVersion>1.0.3</FileVersion>
-    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.4</AssemblyVersion>
+    <FileVersion>1.0.4</FileVersion>
+    <Version>1.0.4</Version>
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <Description>A generic tree library in C# that focuses on hierarchical entity representations.  Features: full LINQ querying, intuitive manipulation of nodes, error detection (e.g. cycles), class extensibility (e.g. to accommodate business rules), format conversion / serialization.</Description>
     <Authors>David West</Authors>
