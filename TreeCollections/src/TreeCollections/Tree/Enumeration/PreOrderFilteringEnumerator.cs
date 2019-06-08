@@ -5,6 +5,11 @@ using System.Linq;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Enumerator for pre-order traversal with a filtering predicate and optional max depth of traversal.
+    /// The filtering predicate will terminate traversing a branch if no children satisfy the predicate, even if deeper descendants do.
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
     public class PreOrderFilteringEnumerator<TNode> : IEnumerator<TNode>
         where TNode : TreeNode<TNode>
     {

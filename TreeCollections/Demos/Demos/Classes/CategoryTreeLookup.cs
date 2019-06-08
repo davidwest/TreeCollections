@@ -25,16 +25,6 @@ namespace TreeCollections.DemoConsole.Demos
             return root;
         }
         
-        public AdvancedMutableCategoryNode GetAdvancedMutableCategoryTree()
-        {
-            var dataRoot = GetCategoryDataRoot();
-            var categoryContentMap = GetCategoryContentMap();
-
-            var root = new AdvancedMutableCategoryNode(new DualStateCategoryItem(dataRoot.CategoryId, dataRoot.Name), categoryContentMap);
-            root.Build(dataRoot, n => new DualStateCategoryItem(n.CategoryId, n.Name));
-            return root;
-        }
-
         public ReadOnlyCategoryNode GetReadOnlyCategoryTree()
         {
             var dataRoot = GetCategoryDataRoot();

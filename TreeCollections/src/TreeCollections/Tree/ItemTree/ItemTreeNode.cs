@@ -4,33 +4,31 @@ using System.Linq;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Abstract tree node that refines TreeNode by including a payload item
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
+    /// <typeparam name="TItem"></typeparam>
     public abstract partial class ItemTreeNode<TNode, TItem> : TreeNode<TNode>, IItemTreeNode<TItem>
         where TNode : ItemTreeNode<TNode, TItem>
     {
-        private readonly List<TNode> _children;
-
         private bool _isBuilt;
         
-        protected ItemTreeNode(TItem item, 
-                                TNode parent, 
-                                List<TNode> emptyChildren)
-            : base(parent, emptyChildren)
+        protected ItemTreeNode(TItem item, TNode parent)
+            : base(parent, new List<TNode>())
         {
             Item = item;
-
-            _children = emptyChildren;
         }
-
+        
         public TItem Item { get; }
 
-        public int OrderIndex => Parent?._children.IndexOf(This) ?? -1;
-
+        /// <summary>
+        /// Abstract factory method for generating a descendant
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         protected abstract TNode Create(TItem item, TNode parent);
-        
-        protected virtual void OnNodeAttached() { }
-        
-        protected virtual void SetChildErrorsOnAttachment() { }
-        protected virtual bool OnAddCanProceed() => true;
         
         internal void Build(IReadOnlyList<TItem> childItems)
         {
@@ -61,7 +59,7 @@ namespace TreeCollections
                 .Select(item => Create(item, This))
                 .ToArray();
 
-            _children.AddRange(newNodes);
+            AppendChildren(newNodes);
 
             SetChildrenSiblingReferences();
             SetChildErrorsOnAttachment();

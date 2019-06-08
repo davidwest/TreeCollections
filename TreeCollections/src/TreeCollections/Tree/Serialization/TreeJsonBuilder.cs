@@ -5,6 +5,10 @@ using System.Text;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Builder for representing a tree as JSON
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
     public class TreeJsonBuilder<TNode> where TNode : TreeNode<TNode>
     {
         private readonly Func<TNode, Dictionary<string, string>> _toProperties;
@@ -24,21 +28,51 @@ namespace TreeCollections
             : this(n => new Dictionary<string, string> { {"HierarchyId", n.HierarchyId.ToString("/").WrapDoubleQuotes()}}, childrenPropertyName)
         { }
 
+        /// <summary>
+        /// Build JSON representation of tree from given node
+        /// </summary>
+        /// <param name="node">Relative root node</param>
+        /// <param name="includeRoot">Include relative root in JSON</param>
+        /// <returns></returns>
         public string ToJson(TNode node, bool includeRoot = true)
         {
             return ToJson(node, n => true, int.MaxValue, includeRoot);
         }
 
+        /// <summary>
+        /// Build JSON representation of tree from given node with a filtering predicate
+        /// The filtering predicate will terminate traversing a branch if no children satisfy the predicate, even if deeper descendants do.
+        /// </summary>
+        /// <param name="node">Relative root node</param>
+        /// <param name="allowNext">Predicate determining eligibility of node and its descendants</param>
+        /// <param name="includeRoot">Include relative root in JSON</param>
+        /// <returns></returns>
         public string ToJson(TNode node, Func<TNode, bool> allowNext, bool includeRoot = true)
         {
             return ToJson(node, allowNext, int.MaxValue, includeRoot);
         }
 
+        /// <summary>
+        /// Build JSON representation of tree from given node to maximum relative depth
+        /// </summary>
+        /// <param name="node">Relative root node</param>
+        /// <param name="maxRelativeDepth">Max depth of traversal (relative to root)</param>
+        /// <param name="includeRoot">Include relative root in JSON</param>
+        /// <returns></returns>
         public string ToJson(TNode node, int maxRelativeDepth, bool includeRoot = true)
         {
             return ToJson(node, n => true, maxRelativeDepth, includeRoot);
         }
 
+        /// <summary>
+        /// Build JSON representation of tree from given node with a filtering predicate to maximum relative depth.
+        /// The filtering predicate will terminate traversing a branch if no children satisfy the predicate, even if deeper descendants do.
+        /// </summary>
+        /// <param name="root">Relative root node</param>
+        /// <param name="allowNext">Predicate determining eligibility of node and its descendants</param>
+        /// <param name="maxRelativeDepth">Max depth of traversal (relative to root)</param>
+        /// <param name="includeRoot">Include relative root in JSON</param>
+        /// <returns></returns>
         public string ToJson(TNode root, Func<TNode, bool> allowNext, int maxRelativeDepth, bool includeRoot = true)
         {
             if (!allowNext(root) || maxRelativeDepth < 0) return string.Empty;
@@ -59,7 +93,6 @@ namespace TreeCollections
             return _builder.ToString();
         }
 
-        
         private void BuildItem(TNode node, int curDepth)
         {
             _builder.Append("{");
@@ -77,7 +110,6 @@ namespace TreeCollections
 
             _builder.Append("}");
         }
-
 
         private void BuildChildren(TNode node, int curDepth, string prefix)
         {

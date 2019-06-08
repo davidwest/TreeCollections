@@ -3,15 +3,26 @@ using System.Linq;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Abstract tree node that refines ItemTreeNode by allowing the enforcement of uniqueness constraints
+    /// based on properties of its payload item (entity).
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
+    /// <typeparam name="TId"></typeparam>
+    /// <typeparam name="TItem"></typeparam>
     public abstract partial class EntityTreeNode<TNode, TId, TItem> : ItemTreeNode<TNode, TItem>, IEntityTreeNode<TId, TItem> 
         where TNode: EntityTreeNode<TNode, TId, TItem>
     {
-        // --- root ---
+        /// <summary>
+        /// Root constructor
+        /// </summary>
+        /// <param name="definition">Entity definition that determines identity parameters</param>
+        /// <param name="checkOptions">Options governing how uniqueness is enforced</param>
+        /// <param name="rootItem">Item contained by root</param>
         protected EntityTreeNode(IEntityDefinition<TId, TItem> definition,
                                  ErrorCheckOptions checkOptions,
-                                 TItem rootItem,
-                                 List<TNode> emptyChildren)
-            : base(rootItem, null, emptyChildren)
+                                 TItem rootItem)
+            : base(rootItem, null)
         {
             Definition = definition;
             CheckOptions = checkOptions;
@@ -22,11 +33,13 @@ namespace TreeCollections
                     : null;
         }
         
-        // --- descendant ---
-        protected EntityTreeNode(TItem item, 
-                                 TNode parent, 
-                                 List<TNode> emptyChildren)
-            : base(item, parent, emptyChildren)
+        /// <summary>
+        /// Descendant constructor
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="parent"></param>
+        protected EntityTreeNode(TItem item, TNode parent)
+            : base(item, parent)
         {
             Definition = parent.Definition;
             CheckOptions = parent.CheckOptions;
@@ -41,7 +54,7 @@ namespace TreeCollections
         public TId Id => Definition.GetId(Item);
 
         
-        // ----- Tree-level properties -----
+        // ----- Shared by all nodes in tree -----
         internal HashSet<TId> TreeIdMap { get; set; }
         // --------------------------------------------------
 
@@ -103,10 +116,9 @@ namespace TreeCollections
             nodesGroupedById.ForEach(grp => TreeIdMap.Add(grp.Key));
         }
         
-        protected bool IdentityTrackingIsTreeScope => TreeIdMap != null;
+        private protected bool IdentityTrackingIsTreeScope => TreeIdMap != null;
 
-        protected bool HasEquivalentId(TId otherId) => Definition.IdEqualityComparer.Equals(Id, otherId);
-
+        private protected bool HasEquivalentId(TId otherId) => Definition.IdEqualityComparer.Equals(Id, otherId);
 
         private void SetChildCyclicIdErrorsOnAttachment()
         {

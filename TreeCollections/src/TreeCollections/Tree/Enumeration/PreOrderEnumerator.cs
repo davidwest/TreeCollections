@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Enumerator for pre-order traversal with optional max depth of traversal
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
     public class PreOrderEnumerator<TNode> : IEnumerator<TNode>
         where TNode : TreeNode<TNode>
     {

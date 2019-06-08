@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Container exposing enumeration with an injectable enumerator
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
     public class EnumeratorHost<TNode> : IEnumerable<TNode>
         where TNode : TreeNode<TNode>
     {

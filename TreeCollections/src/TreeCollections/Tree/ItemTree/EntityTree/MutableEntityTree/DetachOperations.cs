@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable UnusedTypeParameter
 
 namespace TreeCollections
 {
     public abstract partial class MutableEntityTreeNode<TNode, TId, TItem>
     {
+        /// <summary>
+        /// Detach this node from the tree
+        /// </summary>
         public virtual void Detach()
         {
             if (IsRoot)
@@ -24,7 +29,7 @@ namespace TreeCollections
             PreviousSibling = null;
             NextSibling = null;
 
-            oldParent._children.Remove(This);
+            oldParent.ChildrenList.Remove(This);
 
             oldParent.SetChildrenSiblingReferences();
 
@@ -38,8 +43,13 @@ namespace TreeCollections
             OnNodeDetached(oldParent);
         }
 
-
-        public virtual void DetachWhere(Func<TNode, bool> satisfiesCondition)
+        /// <summary>
+        /// Detach nodes from the tree that satisfy the specified predicate.
+        /// Nodes in scope of this operation include this node and all descendants.
+        /// Returns sequence of detached nodes.
+        /// </summary>
+        /// <param name="satisfiesCondition">Filtering predicate</param>
+        public virtual IEnumerable<TNode> DetachWhere(Func<TNode, bool> satisfiesCondition)
         {
             var nodesToRemove = this.Where(satisfiesCondition).OrderBy(n => n.Level).ToList();
 
@@ -50,19 +60,23 @@ namespace TreeCollections
                 if (!cur.IsRoot)
                 {
                     cur.Detach();
+                    yield return cur;
                 }
 
                 nodesToRemove.Remove(cur);
             }
         }
 
-
-        public virtual void DetachChildren()
+        /// <summary>
+        /// Detach this node's children from the tree. Returns sequence of detached nodes.
+        /// </summary>
+        public virtual IEnumerable<TNode> DetachChildren()
         {
-            while (_children.Count > 0)
+            while (ChildrenList.Count > 0)
             {
-                var child = _children[0];
+                var child = ChildrenList[0];
                 child.Detach();
+                yield return child;
             }
         }
     }

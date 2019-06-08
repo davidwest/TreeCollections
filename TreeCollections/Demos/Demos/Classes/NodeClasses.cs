@@ -2,7 +2,7 @@
 
 namespace TreeCollections.DemoConsole.Demos
 {    
-    public class CategoryEntityDefinition<TValue> : EntityDefinition<long, string, TValue> 
+    public class CategoryEntityDefinition<TValue> : NamedEntityDefinition<long, TValue> 
         where TValue : CategoryItem
     {
         public static readonly CategoryEntityDefinition<TValue> Instance = new CategoryEntityDefinition<TValue>();
@@ -11,7 +11,6 @@ namespace TreeCollections.DemoConsole.Demos
         { }
     }
 
-    
     public class SimpleMutableCategoryNode : MutableEntityTreeNode<SimpleMutableCategoryNode, long, string, CategoryItem>
     {
         public SimpleMutableCategoryNode(CategoryItem item)
@@ -40,7 +39,6 @@ namespace TreeCollections.DemoConsole.Demos
         }
     }
 
-
     public class ReadOnlyCategoryNode : ReadOnlyEntityTreeNode<ReadOnlyCategoryNode, long, DualStateCategoryItem>
     {
         public ReadOnlyCategoryNode(DualStateCategoryItem item)
@@ -63,7 +61,6 @@ namespace TreeCollections.DemoConsole.Demos
         protected override void OnNodeAttached()
         {
             SelectPathUpward().ForEach(n => n.HierarchyCount++);
-        }
-        
+        }   
     }
 }

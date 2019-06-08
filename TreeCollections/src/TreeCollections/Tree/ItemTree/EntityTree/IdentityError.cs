@@ -12,7 +12,7 @@ namespace TreeCollections
         TreeScopeIdDuplicate = 0x8
     }
     
-    public static class IdentityErrorExensions
+    public static class IdentityErrorExtensions
     {
         public static IdentityError Normalize(this IdentityError source)
         {

@@ -21,7 +21,6 @@ namespace TreeCollections
             }
         }
 
-
         private void SetErrorsAfterMovingThis()
         {
             SetSiblingErrors();
@@ -37,7 +36,6 @@ namespace TreeCollections
             }
         }
 
-        
         private void SetSiblingErrors()
         {
             TNode[] siblings = null;
@@ -68,7 +66,6 @@ namespace TreeCollections
             }
         }
 
-
         private void SetCyclicIdErrorsForEach()
         {
             this.ForEach(n => n.SetCyclicIdErrors());
@@ -85,7 +82,6 @@ namespace TreeCollections
             Error |= IdentityError.CyclicIdDuplicate;
             existingMatch.Error |= IdentityError.CyclicIdDuplicate;
         }
-
 
         private void SetTreeScopeIdErrorsForEach()
         {
@@ -106,7 +102,6 @@ namespace TreeCollections
 
             duplicates.ForEach(dup => dup.Error |= IdentityError.TreeScopeIdDuplicate);
         }
-
 
         private void UpdateErrorsBeforeDetachingThis()
         {
@@ -133,7 +128,6 @@ namespace TreeCollections
             }            
         }
 
-
         private void UpdateCyclicIdErrorsBeforeDetachingThis()
         {
             var nodesWithCycles = SelectDescendants().Where(n => n.Error.HasFlag(IdentityError.CyclicIdDuplicate));
@@ -159,7 +153,6 @@ namespace TreeCollections
             }
         }
 
-
         private void UpdateSiblingIdErrorsBeforeDetachingThis()
         {
             Error &= ~IdentityError.SiblingIdDuplicate;
@@ -172,7 +165,6 @@ namespace TreeCollections
             }
         }
 
-
         private void UpdateSiblingAliasErrorsBeforeDetachingThis()
         {
             Error &= ~IdentityError.SiblingAliasDuplicate;
@@ -184,7 +176,6 @@ namespace TreeCollections
                 siblingDuplicates[0].Error &= ~IdentityError.SiblingAliasDuplicate;
             }
         }
-
 
         private void UpdateTreeScopeIdErrorsBeforeDetachingThis()
         {

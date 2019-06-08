@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Enumerator for level-order (breadth-first) traversal with optional max depth of traversal
+    /// </summary>
+    /// <typeparam name="TNode"></typeparam>
     public class LevelOrderEnumerator<TNode> : IEnumerator<TNode>
         where TNode : TreeNode<TNode>
     {
@@ -13,14 +17,14 @@ namespace TreeCollections
         private int _currentGenerationCount;
         private int _nextGenerationCount;
         
-        internal LevelOrderEnumerator(TNode rootOfIteration, int? maxDepth = null)
+        internal LevelOrderEnumerator(TNode rootOfIteration, int? maxRelativeDepth = null)
         {
             _rootOfIteration = rootOfIteration;
             _currentDepth = 0;
             _queue = new Queue<TNode>();
             _currentGenerationCount = 1;
             _nextGenerationCount = 0;
-            _maxDepth = maxDepth ?? int.MaxValue;
+            _maxDepth = maxRelativeDepth ?? int.MaxValue;
 
             Current = null;
         }
@@ -53,6 +57,7 @@ namespace TreeCollections
         private void ProcessCurrent()
         {
             _currentGenerationCount--;
+
             if (_currentDepth >= _maxDepth) return;
 
             foreach (var child in Current.Children)

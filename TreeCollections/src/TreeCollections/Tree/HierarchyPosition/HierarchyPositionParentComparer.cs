@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TreeCollections
 {
-    public class HierarchyPositionParentComparer : IEqualityComparer<HierarchyPosition>
+    internal class HierarchyPositionParentComparer : IEqualityComparer<HierarchyPosition>
     {
         public static readonly HierarchyPositionParentComparer Default = new HierarchyPositionParentComparer();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable UnusedTypeParameter
 
 namespace TreeCollections
 {
@@ -16,7 +17,6 @@ namespace TreeCollections
             newParent.AttachChildOnMove(This, targetIndex);
         }
 
-
         private void MoveToSiblingAdjacentPosition(TNode targetNode, Adjacency adjacency)
         {
             var curIndex = OrderIndex;
@@ -27,15 +27,14 @@ namespace TreeCollections
 
             targetIndex += (diff < 0 ? 0 : -1) + (adjacency == Adjacency.Before ? 0 : 1);
 
-            Parent._children.Remove(This);
-            Parent._children.Insert(targetIndex, This);
+            Parent.ChildrenList.Remove(This);
+            Parent.ChildrenList.Insert(targetIndex, This);
 
             Parent.SetChildrenSiblingReferences();
 
             Parent.OnChildrenReordered();
         }
 
-        
         private void AttachChildOnAdd(TNode node, int? insertIndex = null)
         {
             InnerAddChild(node, insertIndex);
@@ -46,7 +45,6 @@ namespace TreeCollections
             node.OnNodeAttached();
         }
 
-        
         private void AttachChildOnMove(TNode node, int? insertIndex = null)
         {
             node.Parent = This;
@@ -67,7 +65,6 @@ namespace TreeCollections
             node.OnNodeReparented();
         }
 
-        
         private void InnerAddChild(TNode node, int? insertIndex)
         {
             if (insertIndex < 0)
@@ -75,16 +72,15 @@ namespace TreeCollections
                 throw new ArgumentOutOfRangeException(nameof(insertIndex));
             }
 
-            if (!insertIndex.HasValue || insertIndex.Value >= _children.Count)
+            if (!insertIndex.HasValue || insertIndex.Value >= ChildrenList.Count)
             {
-                _children.Add(node);
+                ChildrenList.Add(node);
             }
             else
             {
-                _children.Insert(insertIndex.Value, node);
+                ChildrenList.Insert(insertIndex.Value, node);
             }
         }
-
 
         private bool HasSameIdentityAs(TNode other) => HasEquivalentId(other.Id);
         private bool HasSameAliasAs(TNode other) => Definition.AliasEqualityComparer.Equals(Item, other.Item);

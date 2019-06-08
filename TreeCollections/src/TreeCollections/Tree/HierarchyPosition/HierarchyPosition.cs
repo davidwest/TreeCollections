@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace TreeCollections
 {
+    /// <summary>
+    /// Describes the unique position of a tree node as sequence of ordinal integers based on pre-order traversal.
+    /// Can be compared (equal, greater than, less than) with other HierarchyPosition objects
+    /// </summary>
     public partial class HierarchyPosition : IComparable<HierarchyPosition>, IEquatable<HierarchyPosition>, IEnumerable<int>
     {
         public HierarchyPosition(IReadOnlyList<int> components)
@@ -17,6 +21,14 @@ namespace TreeCollections
             Components = components;
         }
 
+        /// <summary>
+        /// Compares this position with another position  
+        /// 0 signifies equivalent positions; 
+        /// greater than 0 signifies other position is deeper; 
+        /// less than 0 signifies other position is shallower
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(HierarchyPosition other)
         {
             int? determinant = null;
@@ -31,7 +43,9 @@ namespace TreeCollections
         }
 
         public IReadOnlyList<int> Components { get; }
+
         public int Level => Components.Count - 1;
+
         public int ChildOrderIndex => Components.LastOrDefault();
 
         private int Length => Components.Count;
@@ -62,9 +76,7 @@ namespace TreeCollections
 
         public string ToString(string separator) => Components.SerializeToString(separator);
 
-
         public bool Equals(HierarchyPosition other) => Components.SequenceEqual(other.Components);
-
 
         public override bool Equals(object obj)
         {
@@ -74,7 +86,6 @@ namespace TreeCollections
         }
 
         public override int GetHashCode() => Components.GetHashCode();
-
 
         public IEnumerator<int> GetEnumerator()
         {
