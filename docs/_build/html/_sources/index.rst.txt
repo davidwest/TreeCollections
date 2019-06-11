@@ -1,5 +1,5 @@
-TreeCollection Documentation
-============================
+Tree Collection Documentation
+=============================
 
 Coming Soon
 
