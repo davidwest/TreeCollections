@@ -1,4 +1,4 @@
-Tree Collection Documentation
+Tree Collections Documentation
 =============================
 
 Coming Soon
